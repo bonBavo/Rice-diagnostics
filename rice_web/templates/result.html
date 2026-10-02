@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Result - Rice Leaf Doctor{% endblock %}
+{% block content %}
+{% set sure = row['status'] == 'confident' %}
+<div class="card">
+  <img class="photo" src="{{ url_for('photo', filename=row['image_file']) }}" alt="The leaf you uploaded">
+  <p class="badge {{ 'ok' if sure else 'warn' }}">{{ 'Diagnosis' if sure else 'Not sure' }}</p>
+  <h1>{% if sure %}{{ display_name(row['prediction']) }}{% else %}Best guess: {{ display_name(row['prediction']) }}{% endif %}</h1>
+  <div class="row"><span>Confidence</span><strong>{{ row['confidence']|pct }}</strong></div>
+  <div class="track"><div class="fill" style="width: {{ (row['confidence'] * 100)|round(1) }}%"></div></div>
+  {% if not sure %}
+  <div class="note warn">
+    The system is not confident about this photo, so no treatment advice is shown.
+    Take another photo (one leaf, good light, in focus) or ask an agricultural extension officer to look at the plant.
+  </div>
+  {% endif %}
+  <p class="muted">Taken {{ row['created_at']|local_time }}</p>
+</div>
+
+<div class="card">
+  <h2>Other possibilities</h2>
+  {% for t in top_k %}
+  <div class="row"><span>{{ display_name(t['label']) }}</span><span>{{ t['confidence']|pct }}</span></div>
+  <div class="track"><div class="fill" style="width: {{ (t['confidence'] * 100)|round(1) }}%"></div></div>
+  {% endfor %}
+</div>
+
+{% if advice %}
+<div class="card">
+  <h2>What to do</h2>
+  <p>{{ advice['summary'] }}</p>
+  <ul class="tips">{% for a in advice['actions'] %}<li>{{ a }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+
+<div class="actions">
+  <a class="btn" href="{{ url_for('index') }}">Check another leaf</a>
+  <a class="btn secondary" href="{{ url_for('history') }}">History</a>
+  <form method="post" action="{{ url_for('delete', diagnosis_id=row['id']) }}"
+        onsubmit="return confirm('Delete this record and its photo?')">
+    <button class="btn danger" type="submit">Delete</button>
+  </form>
+</div>
+{% endblock %}

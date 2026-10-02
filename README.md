@@ -7,7 +7,7 @@
 This README documents what the software currently does, how the data and model are prepared, how to run the application, what evidence is available, and what remains incomplete. It is written both as an operator's guide and as a sequence for explaining the project to a lecturer. It does not claim field performance, expert approval, or user-study results that have not been collected.
 
 For a separate new-computer installation guide covering Docker Hub and dataset acquisition/preparation, see [SETUP.md](SETUP.md).
-For a Gemini-ready prompt to generate presentation slides, speaker notes, and an explainer-video script, see [GEMINI_PRESENTATION_BRIEF.md](GEMINI_PRESENTATION_BRIEF.md).
+For a Gemini-ready prompt to generate presentation slides, speaker notes, and an explainer-video script, see [GEMINI_PRESENTATION_BRIEF.md](w.md).
 
 ## Share the source on GitHub
 
@@ -448,5 +448,6 @@ Browser -> Flask routes -> upload validation -> Predictor -> CNN
 | Non-rice detector | Not implemented; current uncertainty threshold is not a substitute |
 | Human/user evaluation | Not completed |
 | Report | Use `rice_project_plan (1).xlsx` to track remaining diagrams, report sections, decisions, and evidence; verify requirements with the supervisor |
-#   R i c e - d i a g n o s t i c s  
+#   R i c e - d i a g n o s t i c s 
+ 
  

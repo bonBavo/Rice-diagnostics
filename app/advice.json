@@ -1,0 +1,53 @@
+{
+  "_note": "DRAFT guidance. Have KALRO or Mwea extension officers review and correct every entry before real farmers rely on it.",
+  "healthy": {
+    "name": "Healthy",
+    "summary": "No disease was detected on this leaf.",
+    "actions": [
+      "Keep checking your fields regularly, especially after rain or humid weather.",
+      "Check leaves from different parts of the field, not just one plant.",
+      "If you are still worried about the plants, ask your extension officer to inspect them."
+    ]
+  },
+  "blast": {
+    "name": "Blast",
+    "summary": "Rice blast is a fungal disease and one of the most damaging rice diseases in Kenya.",
+    "actions": [
+      "Contact your extension officer or KALRO soon to confirm the diagnosis and get treatment advice.",
+      "Avoid applying too much nitrogen fertiliser, which tends to make blast worse.",
+      "Keep water management and drainage in good order.",
+      "For future seasons, ask about blast-tolerant varieties and clean seed."
+    ]
+  },
+  "brown_spot": {
+    "name": "Brown spot",
+    "summary": "Brown spot is a fungal disease that shows as brown spots on the leaves. It is more common on stressed or poorly fed crops.",
+    "actions": [
+      "Ask your extension officer to confirm it before you treat.",
+      "Feed the crop in a balanced way and avoid water stress.",
+      "Use clean, healthy seed and avoid saving seed from infected fields.",
+      "Only use a fungicide if an officer confirms it is needed."
+    ]
+  },
+  "bacterial_leaf_blight": {
+    "name": "Bacterial leaf blight",
+    "summary": "A bacterial disease that makes leaves yellow and dry from the tips and edges. It can spread through water and rain splash.",
+    "actions": [
+      "Ask your extension officer to confirm it. Bacterial diseases are managed differently from fungal ones such as blast.",
+      "Avoid applying too much nitrogen fertiliser.",
+      "Avoid moving water or tools from affected fields to healthy ones.",
+      "Use clean seed and ask about resistant varieties for future seasons."
+    ]
+  },
+  "rice_yellow_mottle_virus": {
+    "name": "Rice yellow mottle virus (RYMV)",
+    "summary": "A viral disease that causes yellowing, mottling and stunting. There is no cure once a plant is infected.",
+    "actions": [
+      "Report it to your extension officer or KALRO so it can be confirmed and tracked.",
+      "Remove badly affected plants if an officer advises it, so the virus spreads less.",
+      "Keep weeds and volunteer rice under control, because they can carry the virus.",
+      "Avoid working through infected plants and then through healthy ones.",
+      "Ask about resistant varieties for future seasons."
+    ]
+  }
+}

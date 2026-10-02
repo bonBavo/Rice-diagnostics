@@ -1,0 +1,13 @@
+{
+  "class_names": [
+    "healthy",
+    "blast",
+    "brown_spot",
+    "bacterial_leaf_blight",
+    "leaf_scald",
+    "narrow_brown_spot"
+  ],
+  "img_size": 160,
+  "seed": 42,
+  "external_validation": true
+}

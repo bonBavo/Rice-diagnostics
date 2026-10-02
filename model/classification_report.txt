@@ -1,0 +1,13 @@
+test accuracy: 0.8573
+
+                      precision     recall   f1-score    support
+
+             healthy     0.8333     0.9615     0.8929         52
+               blast     0.7778     0.8050     0.7912        200
+          brown_spot     0.9220     0.8514     0.8852        222
+bacterial_leaf_blight     0.9500     0.8566     0.9009        244
+          leaf_scald     0.9677     0.8571     0.9091         35
+   narrow_brown_spot     0.6053     1.0000     0.7541         46
+
+           macro avg     0.8427     0.8886     0.8556        799
+        weighted avg     0.8724     0.8573     0.8605        799

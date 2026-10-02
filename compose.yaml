@@ -1,0 +1,16 @@
+services:
+  rice-diagnostics:
+    image: bravenamuli/rice-diagnostics:1.1
+    ports:
+      - "127.0.0.1:5001:5000"
+    environment:
+      SECRET_KEY: "${SECRET_KEY:-local-only-change-this-secret}"
+      CONFIDENCE_THRESHOLD: "${CONFIDENCE_THRESHOLD:-0.70}"
+    volumes:
+      - rice-diagnostics-data:/app/data
+    init: true
+    restart: unless-stopped
+
+volumes:
+  rice-diagnostics-data:
+    name: docker_rice-diagnostics-data

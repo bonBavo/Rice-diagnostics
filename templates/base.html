@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173f32">
+<meta name="description" content="A local rice leaf disease screening prototype for six supported classes.">
+<title>{% block title %}Rice Leaf Doctor{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="{{ url_for('main.index') }}" aria-label="Rice Leaf Doctor home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M25.6 5.5C15.2 5.8 8.2 9.8 7 17.1c-.7 4.3 2 7.6 6 7.2 7.1-.7 11.4-9.6 12.6-18.8Z" fill="currentColor"/><path d="M6 27c4.1-6.4 8.5-10.4 14.2-14.3" stroke="#173f32" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </span>
+      <span>Rice Leaf <span class="brand-light">Doctor</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a class="{{ 'active' if request.endpoint == 'main.index' else '' }}" href="{{ url_for('main.index') }}">Diagnose</a>
+      <a class="{{ 'active' if request.endpoint in ('main.history', 'main.result') else '' }}" href="{{ url_for('main.history') }}">History</a>
+    </nav>
+  </div>
+</header>
+<main class="page-shell">{% block content %}{% endblock %}</main>
+<footer class="site-footer">
+  <span class="footer-mark" aria-hidden="true">i</span>
+  <span>Prototype guidance only. Confirm important decisions with an agricultural extension officer.</span>
+</footer>
+</body>
+</html>

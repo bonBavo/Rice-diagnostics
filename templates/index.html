@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Diagnose a Leaf - Rice Leaf Doctor{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Rice leaf screening prototype</p>
+    <h1>A clearer first look at rice leaf health.</h1>
+    <p>Upload a well-lit photo to see which supported class the image most closely matches. Use the result as guidance, not as a substitute for expert diagnosis.</p>
+    <div class="class-list" aria-label="Supported classes">
+      <span class="class-chip">Healthy</span>
+      <span class="class-chip">Blast</span>
+      <span class="class-chip">Brown spot</span>
+      <span class="class-chip">Bacterial leaf blight</span>
+      <span class="class-chip">Leaf scald</span>
+      <span class="class-chip">Narrow brown spot</span>
+    </div>
+  </div>
+</section>
+{% if model_error %}<div class="card warn" role="alert">{{ model_error }}</div>{% endif %}
+{% if error %}<div class="card bad" role="alert">{{ error }}</div>{% endif %}
+<div class="home-grid">
+  <form class="card upload-card" id="form" method="post" action="{{ url_for('main.submit') }}" enctype="multipart/form-data">
+    <div class="section-heading">
+      <span class="upload-icon" aria-hidden="true">＋</span>
+      <p class="eyebrow">Start a check</p>
+      <h2>Upload a leaf photo</h2>
+      <p class="muted small">Choose an image from your device or take a photo with your camera.</p>
+    </div>
+    <label class="field-label" for="photo">Select an image</label>
+    <input class="upload-control" type="file" id="photo" name="photo" accept="image/*" required>
+    <p class="file-note muted">JPEG or PNG · Maximum file size 8 MB</p>
+    <img id="preview" alt="Preview of the selected leaf photo" hidden>
+    <button class="btn upload-submit" id="go" type="submit">Analyse photo <span aria-hidden="true">→</span></button>
+  </form>
+  <aside class="card tips-card">
+    <p class="eyebrow">Photo guide</p>
+    <h2>Help the model see the leaf</h2>
+    <ul class="tip-list">
+      <li><span class="tip-number">1</span><span><strong>One leaf at a time.</strong><br>Fill most of the frame with the leaf.</span></li>
+      <li><span class="tip-number">2</span><span><strong>Use natural light.</strong><br>Avoid harsh shadows and glare.</span></li>
+      <li><span class="tip-number">3</span><span><strong>Keep it in focus.</strong><br>Hold the camera steady and show the affected area.</span></li>
+    </ul>
+    <div class="scope-note">The model covers six classes. Unfamiliar or unclear images can still be misclassified; confirm important decisions with an extension officer.</div>
+  </aside>
+</div>
+<script>
+const input = document.getElementById('photo'), preview = document.getElementById('preview'),
+      btn = document.getElementById('go');
+let previewUrl = null;
+input.addEventListener('change', () => {
+  const f = input.files[0];
+  if (previewUrl) URL.revokeObjectURL(previewUrl);
+  if (!f) { preview.removeAttribute('src'); preview.hidden = true; return; }
+  previewUrl = URL.createObjectURL(f); preview.src = previewUrl; preview.hidden = false;
+});
+document.getElementById('form').addEventListener('submit', () => {
+  btn.disabled = true; btn.textContent = 'Analysing photo…';
+});
+</script>
+{% endblock %}

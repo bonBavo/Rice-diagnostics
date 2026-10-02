@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Result - Rice Leaf Doctor{% endblock %}
+{% block content %}
+{% set sure = row['status'] == 'confident' %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Image assessment</p>
+    <h1 class="result-title">{% if sure %}{{ display_name(row['prediction']) }}{% else %}We couldn’t be sure{% endif %}</h1>
+    <p class="muted">{% if sure %}This is the class the model matched most closely.{% else %}Try a clearer image of one rice leaf, or ask an agricultural extension officer.{% endif %}</p>
+  </div>
+  <span class="badge {{ 'ok' if sure else 'warn' }}">{{ 'Model result' if sure else 'Uncertain result' }}</span>
+</div>
+
+<div class="result-grid">
+  <section class="card">
+    <div class="photo-frame">
+      <img class="photo" src="{{ url_for('main.photo', filename=row['image_file']) }}" alt="The leaf photo you uploaded">
+    </div>
+    <div class="score-heading"><span>Top class score</span><strong>{{ row['confidence']|pct }}</strong></div>
+    <div class="track" role="progressbar" aria-label="Top class score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ (row['confidence'] * 100)|round(1) }}">
+      <div class="fill" style="width: {{ (row['confidence'] * 100)|round(1) }}%"></div>
+    </div>
+    {% if not sure %}
+    <div class="note warn">
+      The photo may be unclear, show an unsupported condition, or not be a rice leaf. This score threshold is not a trained non-rice detector, so out-of-scope images can still be misclassified.
+    </div>
+    {% endif %}
+    <p class="result-time muted">Checked {{ row['created_at']|local_time }}</p>
+  </section>
+
+  <div>
+    <section class="card">
+      <p class="eyebrow">Model output</p>
+      <h2>{% if sure %}Other possible matches{% else %}No diagnosis shown{% endif %}</h2>
+      {% if sure %}
+      <div class="candidate-list">
+        {% for t in top_k %}
+        <div>
+          <div class="score-heading"><span class="candidate-name">{{ display_name(t['label']) }}</span><strong>{{ t['confidence']|pct }}</strong></div>
+          <div class="track"><div class="fill" style="width: {{ (t['confidence'] * 100)|round(1) }}%"></div></div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="muted">The system did not confidently identify a supported rice-leaf class.</p>
+      {% endif %}
+    </section>
+
+    {% if advice %}
+    <section class="card">
+      <p class="eyebrow">General guidance</p>
+      <h2>What to consider</h2>
+      <p>{{ advice['summary'] }}</p>
+      <ul class="advice-list">{% for a in advice['actions'] %}<li>{{ a }}</li>{% endfor %}</ul>
+    </section>
+    {% elif sure %}
+    <section class="card">
+      <p class="eyebrow">Next step</p>
+      <h2>Confirm before acting</h2>
+      <p class="muted">This class does not yet have locally reviewed management guidance. Ask an agricultural extension officer to confirm the result.</p>
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+<div class="actions">
+  <a class="btn" href="{{ url_for('main.index') }}">Check another leaf <span aria-hidden="true">→</span></a>
+  <a class="btn secondary" href="{{ url_for('main.history') }}">History</a>
+  <form method="post" action="{{ url_for('main.delete', diagnosis_id=row['id']) }}"
+        onsubmit="return confirm('Delete this record and its photo?')">
+    <button class="btn danger" type="submit">Delete</button>
+  </form>
+</div>
+{% endblock %}

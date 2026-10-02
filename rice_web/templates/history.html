@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}History - Rice Leaf Doctor{% endblock %}
+{% block content %}
+<h1>Your history</h1>
+<p class="muted">Saved for this browser only. If you clear your browser data, these records can no longer be opened.</p>
+{% if rows %}
+<div class="card">
+  <h2>Summary</h2>
+  <table>
+    <tr><th>Result</th><th>Photos</th></tr>
+    {% for c in counts %}<tr><td>{{ display_name(c['label']) }}</td><td>{{ c['n'] }}</td></tr>{% endfor %}
+  </table>
+</div>
+<div class="card">
+  {% for r in rows %}
+  <a class="item" href="{{ url_for('result', diagnosis_id=r['id']) }}">
+    <img src="{{ url_for('photo', filename=r['image_file']) }}" alt="" loading="lazy">
+    <div>
+      <strong>{{ display_name(r['prediction']) }}</strong>
+      {% if r['status'] != 'confident' %}<span class="badge warn">not sure</span>{% endif %}<br>
+      <span class="muted">{{ r['created_at']|local_time }} &middot; {{ r['confidence']|pct }}</span>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card">No photos checked yet. <a href="{{ url_for('index') }}">Check a leaf</a></div>
+{% endif %}
+{% endblock %}

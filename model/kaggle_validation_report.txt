@@ -1,0 +1,13 @@
+kaggle_validation accuracy: 0.7239
+
+                      precision     recall   f1-score    support
+
+             healthy     0.7500     0.9205     0.8265         88
+               blast     0.5176     0.5176     0.5176         85
+          brown_spot     0.8364     0.5287     0.6479         87
+bacterial_leaf_blight     0.9773     0.5059     0.6667         85
+          leaf_scald     0.9136     0.8605     0.8862         86
+   narrow_brown_spot     0.6000     1.0000     0.7500         87
+
+           macro avg     0.7658     0.7222     0.7158        518
+        weighted avg     0.7656     0.7239     0.7167        518

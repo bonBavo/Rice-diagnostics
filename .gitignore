@@ -1,0 +1,31 @@
+.venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+uploads/
+history.db
+history.db-*
+*.sqlite
+*.sqlite3
+*.tflite
+.idea/
+.junie/
+.pytest_cache/
+.output.txt
+dataset/
+external_datasets/
+Rice Leaf Disease Images/
+RiceLeafsDisease/
+/paddy_doctor/
+/Paddy Doctor/
+/train/
+/validation/
+model_candidate/
+model_sixclass_candidate/
+model/previous_3class/
+model/previous_4class/
+rice-diagnostics-image.tar

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Rice Leaf Doctor{% endblock %}</title>
+<style>
+:root{--green:#2f5d3a;--green-dark:#1f4029;--bg:#f6f8f4;--card:#fff;--text:#1d2b20;--muted:#566559;--line:#d3ddd0;
+--warn-bg:#fff4d6;--warn:#6b4700;--bad-bg:#fdecea;--bad:#a1241c;--ok:#1e6b34}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;font-size:17px}
+header{background:var(--green)}
+.topbar{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{color:#fff;font-weight:700;font-size:1.15rem;text-decoration:none}
+nav a{color:#fff;text-decoration:none;margin-left:18px;padding:6px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus{border-color:#fff}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.2em 0 .5em}
+h2{font-size:1.15rem;margin:.1em 0 .5em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+.card.warn,.note.warn{background:var(--warn-bg);border-color:#e6cf8a;color:var(--warn)}
+.card.bad{background:var(--bad-bg);border-color:#efb3ad;color:var(--bad)}
+.note{border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0}
+.btn{display:inline-block;background:var(--green);color:#fff;border:2px solid var(--green);border-radius:10px;padding:12px 22px;font-size:1.05rem;font-weight:600;text-decoration:none;cursor:pointer;min-height:48px}
+.btn:hover,.btn:focus{background:var(--green-dark);border-color:var(--green-dark)}
+.btn.secondary{background:#fff;color:var(--green)}
+.btn.danger{background:#fff;color:var(--bad);border-color:var(--bad)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.muted{color:var(--muted);font-size:.92rem}
+.photo{width:100%;max-height:420px;object-fit:contain;background:#eef2ec;border-radius:10px;margin-bottom:12px}
+.track{background:#e5ece3;border-radius:8px;height:14px;overflow:hidden}
+.fill{height:100%;background:var(--green)}
+.badge{display:inline-block;border-radius:999px;padding:2px 12px;font-size:.85rem;font-weight:600;margin:0}
+.badge.ok{background:#dff1e3;color:var(--ok)}
+.badge.warn{background:var(--warn-bg);color:var(--warn)}
+.row{display:flex;justify-content:space-between;gap:12px;margin:10px 0 4px}
+ul.tips{margin:.4em 0 0;padding-left:1.2em}
+ul.tips li{margin:.25em 0}
+input[type=file]{width:100%;padding:14px;border:2px dashed var(--green);border-radius:10px;background:#f2f7f1;font-size:1rem}
+#preview{width:100%;max-height:320px;object-fit:contain;border-radius:10px;margin:12px 0}
+.item{display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit;padding:10px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item img{width:72px;height:72px;object-fit:cover;border-radius:8px;flex:none;background:#eef2ec}
+table{border-collapse:collapse;width:100%}
+td,th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+td:last-child,th:last-child{text-align:right}
+footer{max-width:760px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);font-size:.88rem}
+</style>
+</head>
+<body>
+<header><div class="topbar">
+  <a class="brand" href="{{ url_for('index') }}">Rice Leaf Doctor</a>
+  <nav><a href="{{ url_for('index') }}">Diagnose</a><a href="{{ url_for('history') }}">History</a></nav>
+</div></header>
+<main>{% block content %}{% endblock %}</main>
+<footer>Automated guidance only. It can be wrong, so confirm important decisions with your agricultural extension officer.</footer>
+</body>
+</html>

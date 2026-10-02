@@ -1,0 +1,10 @@
+flask>=3.0
+tensorflow>=2.16
+numpy
+pillow>=10.0
+scikit-learn
+matplotlib
+pandas
+python-dotenv
+pytest>=8.0
+gunicorn>=22.0

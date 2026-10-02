@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}History - Rice Leaf Doctor{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Your recent checks</p>
+    <h1>Your history</h1>
+    <p class="muted">Saved on this device for this browser. History is local to this installation.</p>
+  </div>
+  {% if rows %}<a class="btn" href="{{ url_for('main.index') }}">Check a new leaf <span aria-hidden="true">→</span></a>{% endif %}
+</div>
+{% if rows %}
+<section class="history-stats" aria-label="Diagnosis totals">
+  {% for c in counts %}
+  <div class="stat-card">
+    <span class="stat-value">{{ c['n'] }}</span>
+    <span class="stat-label">{{ display_name(c['label']) }}</span>
+  </div>
+  {% endfor %}
+</section>
+<section class="card history-card" aria-label="Recent diagnosis records">
+  {% for r in rows %}
+  <a class="history-item" href="{{ url_for('main.result', diagnosis_id=r['id']) }}">
+    <img src="{{ url_for('main.photo', filename=r['image_file']) }}" alt="" loading="lazy">
+    <div class="history-copy">
+      <span class="history-name">{{ display_name(r['prediction']) }}</span>
+      {% if r['status'] != 'confident' %}<span class="badge warn">not sure</span>{% endif %}<br>
+      <span class="history-meta">{{ r['created_at']|local_time }} · Score {{ r['confidence']|pct }}</span>
+    </div>
+    <span class="history-arrow" aria-hidden="true">›</span>
+  </a>
+  {% endfor %}
+  {% if rows|length >= 200 %}<p class="file-note muted">Showing the latest 200 records.</p>{% endif %}
+</section>
+{% else %}
+<section class="card empty-state">
+  <span class="empty-mark" aria-hidden="true">⌁</span>
+  <h2>No checks yet</h2>
+  <p class="muted">Your completed leaf assessments will appear here.</p>
+  <a class="btn" href="{{ url_for('main.index') }}">Check your first leaf <span aria-hidden="true">→</span></a>
+</section>
+{% endif %}
+{% endblock %}

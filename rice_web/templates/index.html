@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Check a rice leaf</h1>
+{% if model_error %}<div class="card warn" role="alert">{{ model_error }}</div>{% endif %}
+{% if error %}<div class="card bad" role="alert">{{ error }}</div>{% endif %}
+<form class="card" id="form" method="post" action="{{ url_for('submit') }}" enctype="multipart/form-data">
+  <label for="photo"><strong>Take a photo or choose one from your phone</strong></label>
+  <input type="file" id="photo" name="photo" accept="image/*" required>
+  <img id="preview" alt="Selected photo" hidden>
+  <button class="btn" id="go" type="submit">Diagnose</button>
+</form>
+<div class="card">
+  <h2>For a good result</h2>
+  <ul class="tips">
+    <li>Photograph one leaf, filling most of the picture.</li>
+    <li>Use daylight and avoid harsh shadows.</li>
+    <li>Hold the phone steady so the leaf is in focus.</li>
+    <li>Choose a leaf that shows the problem, and try a second leaf if unsure.</li>
+  </ul>
+</div>
+<script>
+const input = document.getElementById('photo'), preview = document.getElementById('preview'),
+      btn = document.getElementById('go');
+input.addEventListener('change', () => {
+  const f = input.files[0];
+  if (!f) { preview.hidden = true; return; }
+  preview.src = URL.createObjectURL(f); preview.hidden = false;
+});
+document.getElementById('form').addEventListener('submit', () => {
+  btn.disabled = true; btn.textContent = 'Analysing\u2026';
+});
+</script>
+{% endblock %}
