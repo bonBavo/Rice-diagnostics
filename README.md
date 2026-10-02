@@ -448,6 +448,6 @@ Browser -> Flask routes -> upload validation -> Predictor -> CNN
 | Non-rice detector | Not implemented; current uncertainty threshold is not a substitute |
 | Human/user evaluation | Not completed |
 | Report | Use `rice_project_plan (1).xlsx` to track remaining diagrams, report sections, decisions, and evidence; verify requirements with the supervisor |
-#   R i c e - d i a g n o s t i c s 
- 
- 
+#   R i c e - d i a g n o s t i c s 
+ 
+ 
